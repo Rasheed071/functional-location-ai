@@ -1,6 +1,3 @@
-# app.py
-# Functional Location AI Assistant
-
 import streamlit as st
 import pandas as pd
 from io import BytesIO
@@ -15,12 +12,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain.schema import Document
 from langchain.vectorstores import FAISS
 
-# Import config values from config.py
 from config import OPENAI_API_KEY, DEFAULT_MODEL, DEFAULT_EMBEDDING_MODEL, TEMPERATURE
-
-# Load environment variables
-from dotenv import load_dotenv
-load_dotenv()
 
 # --- Initialize Session State ---
 if 'all_dfs' not in st.session_state:
@@ -399,7 +391,7 @@ def render_fl_analysis_tab():
                 st.markdown(f"<h4>Discovered Rules for Level {selected_level}:</h4>", unsafe_allow_html=True)
                 for sheet, sheet_rules in rules_for_display.items():
                     if sheet_rules:
-                        st.markdown(f"**From Sheet: `{sheet}` (Applies to {sheet_rules[0]['applies_to_count']} records at this level)") # Assuming applies_to_count is same for all rules in sheet
+                        st.markdown(f"**From Sheet: `{sheet}`** (Applies to {sheet_rules[0]['applies_to_count']} records at this level)") # Assuming applies_to_count is same for all rules in sheet
                         rule_df_data = [{"Field Name": rule['field'], "Constant Value": rule['value']} for rule in sheet_rules]
                         st.table(pd.DataFrame(rule_df_data))
                     # else:
